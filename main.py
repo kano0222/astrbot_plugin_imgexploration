@@ -626,13 +626,10 @@ class ImgExplorationPlugin(Star):
             )
         else:
             instruction = (
-                f"搜索结果已以图片消息形式发送给用户。你仍需要向用户说明搜索结果：\n"
-                f"找到 {result_count} 个结果：\n"
-                "1. 标题 - 来源: xxx, 相似度: xx%\n"
-                "   链接: URL\n"
-                "2. ...\n"
-                "注意：请直接输出纯文本，不要使用 Markdown 链接语法 [文本](URL)，"
-                "因为部分平台不支持 Markdown。请直接输出完整 URL。"
+                f"搜索结果已以图片消息形式发送给用户，共 {result_count} 个结果。"
+                "不要重复列出标题、来源或链接。最多补充一句简短且有价值的判断，"
+                "例如指出最可能的出处或最接近的结果；如果没有额外判断，"
+                "仅回复“已发送搜索结果。”"
             )
 
         return json.dumps(

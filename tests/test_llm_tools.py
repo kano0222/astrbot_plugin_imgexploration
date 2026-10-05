@@ -349,6 +349,8 @@ class LLMToolsTests(PluginTestCase):
 
             self.assertTrue(res_dict["success"])
             self.assertTrue(res_dict["message_sent"])
+            self.assertIn("不要重复列出", res_dict["instruction"])
+            self.assertIn("最多补充一句", res_dict["instruction"])
             self.assertEqual(res_dict["selected_by"], "image_id")
             mock_mgr.get_image_by_id.assert_called_once_with(event, "img123")
             mock_mgr.get_image_by_index.assert_not_called()
@@ -399,6 +401,8 @@ class LLMToolsTests(PluginTestCase):
             self.assertTrue(res_dict["success"])
             self.assertFalse(res_dict["message_sent"])
             self.assertEqual(res_dict["selected_by"], "image_index")
+            self.assertIn("搜索结果如下，请向用户展示", res_dict["instruction"])
+            self.assertNotIn("不要重复列出", res_dict["instruction"])
             mock_mgr.get_image_by_id.assert_not_called()
             mock_mgr.get_image_by_index.assert_called_once_with(event, 2)
             mock_convert.assert_awaited_once_with(source_url)
