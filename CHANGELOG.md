@@ -1,5 +1,12 @@
 # Changelog
 
+## [Unreleased]
+
+### ✨ 新增
+
+- Google Lens 支持配置搜索类型、语言、国家、安全过滤、自动裁剪和 SerpAPI 缓存策略
+- 支持解析 `exact_matches` 和 `products` 搜索结果
+
 ## [1.1.3] - 2026-09-15
 
 ### ✨ 新增
