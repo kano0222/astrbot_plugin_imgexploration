@@ -68,6 +68,7 @@ STRATEGY_ALIAS_MAP = {
     "googlelens": "Google Lens",
     # 命令参数按空白分隔时，“Google Lens” 会被拆成 google 和 lens
     "lens": "Google Lens",
+    "谷歌": "Google Lens",
     "ascii2d": "Ascii2d",
     "ascii": "Ascii2d",
     "2d": "Ascii2d",

@@ -191,6 +191,10 @@ class GoogleLensStrategy(ImageSearchStrategy):
         # 检查响应中的错误
         if "error" in data:
             error_msg = data.get("error", "")
+            if "hasn't returned any results" in error_msg.lower():
+                logger.info("[GoogleLens] SerpAPI 未返回匹配结果")
+                return []
+
             if "API key" in error_msg or "exceeded" in error_msg.lower():
                 await self._mark_key_exhausted(api_key)
                 raise SerpApiQuotaExhaustedError(api_key, status=None)

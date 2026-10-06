@@ -82,7 +82,7 @@ class ImgExplorationServiceTests(unittest.IsolatedAsyncioTestCase):
 
         # Alias resolution, case insensitivity, and deduplication
         resolved, not_found = service.resolve_strategy_names(
-            ["sauce", "ascii", "google", "sauce", "unknown_strat"]
+            ["sauce", "ascii", "google", "谷歌", "sauce", "unknown_strat"]
         )
         self.assertEqual(resolved, [strat_sauce, strat_ascii, strat_lens])
         self.assertEqual(not_found, ["unknown_strat"])

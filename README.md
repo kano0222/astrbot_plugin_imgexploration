@@ -216,6 +216,7 @@
 `搜图等待已超时`。
 
 **命令别名：**
+- `谷歌` = `google`
 - `sauce` = `saucenao`
 - `2d` = `ascii2d`
 - `lens` = `google`

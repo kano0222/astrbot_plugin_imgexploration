@@ -327,6 +327,7 @@ class GoogleLensStrategyTest(unittest.IsolatedAsyncioTestCase):
         await strategy.search("https://example.com/image.jpg")
 
         self.assertEqual("visual_matches", strategy.search_type)
+
     async def test_exhausted_keys_fail_without_retrying_each_key(self) -> None:
         strategy, calls = self._strategy_with_statuses([429, 429, 429])
         with self.assertRaises(self.module.ProviderSearchError):
@@ -359,6 +360,17 @@ class GoogleLensStrategyTest(unittest.IsolatedAsyncioTestCase):
         with self.assertRaises(self.module.ProviderSearchError):
             await strategy.search("https://example.com/image.jpg")
 
+        self.assertEqual(["key-a"], calls)
+
+    async def test_no_results_error_returns_empty_result_without_retry(self) -> None:
+        strategy, calls = self._strategy_with_statuses(
+            [200],
+            [{"error": "Google Lens hasn't returned any results for this query."}],
+        )
+
+        result = await strategy.search("https://example.com/image.jpg")
+
+        self.assertEqual([], result)
         self.assertEqual(["key-a"], calls)
 
     async def test_quota_error_payload_retries_with_next_key(self) -> None:
